@@ -32,3 +32,29 @@ export const destroyUser = async (req, res) => {
     }
 };
 
+export const getUserById = async (req, res) => {
+    try {
+        const response = await User.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+export const updateUser = async (req, res) => {
+    try {
+        await User.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json({ msg: "User Updated" });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
